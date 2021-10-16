@@ -5,18 +5,26 @@
  */
 package Vista;
 
+import Controlador.Ctrl_Registros;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author raulv
  */
 public class BorrarDialog extends javax.swing.JDialog {
 
+    Ctrl_Registros controlador = new Ctrl_Registros();
+    
     /**
      * Creates new form BorrarDialog
      */
     public BorrarDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Images/eliminar-usuario.png")));
     }
 
     /**
@@ -28,21 +36,85 @@ public class BorrarDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bBorrar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        etMatricula = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Borrar registros");
+
+        bBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/eliminar-usuario.png"))); // NOI18N
+        bBorrar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bBorrarActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Número de Matrícula");
+
+        etMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                etMatriculaKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(etMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(171, 171, 171)
+                .addComponent(bBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(etMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(bBorrar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBorrarActionPerformed
+        if(etMatricula.getText().isEmpty()){
+            getToolkit().beep();
+            etMatricula.requestFocus();
+        }else{
+            int Matricula = Integer.parseInt(etMatricula.getText());
+            if(controlador.borrarRegistro(Matricula)){
+                JOptionPane.showMessageDialog(this, "Registro borrado correctamente");
+            }else{
+                JOptionPane.showMessageDialog(this, "El registro que desea borrar no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_bBorrarActionPerformed
+
+    private void etMatriculaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_etMatriculaKeyTyped
+        char num = evt.getKeyChar();
+        if (etMatricula.getText().length() == 9) {
+            evt.consume();
+            getToolkit().beep();
+        } else {
+            if (!Character.isDigit(num) && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE) {
+                evt.consume();
+                getToolkit().beep();
+            }
+        }
+    }//GEN-LAST:event_etMatriculaKeyTyped
 
     /**
      * @param args the command line arguments
@@ -87,5 +159,8 @@ public class BorrarDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bBorrar;
+    private javax.swing.JTextField etMatricula;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

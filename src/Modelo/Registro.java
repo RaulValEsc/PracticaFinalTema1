@@ -15,29 +15,29 @@ import java.util.Date;
  */
 public class Registro {
 
-    int id;
+    int nMatricula;
     String nombre;
     Date fNacimiento;
     Double nota;
 
-    public Registro(int id, String nombre, Date fNacimiento, Double nota) {
-        this.id = id;
+    public Registro(int matricula, String nombre, Date fNacimiento, Double nota) {
+        this.nMatricula = matricula;
         this.nombre = nombre;
         this.fNacimiento = fNacimiento;
         this.nota = nota;
     }
 
-    public int getId() {
-        return id;
+    public int getnMatricula() {
+        return nMatricula;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setnMatricula(int matricula) {
+        this.nMatricula = matricula;
     }
 
-    public int getEdad(Date fecha) {
+    public int getEdad() {
         LocalDate fechaHoy = LocalDate.now();
-        LocalDate fechaNacimiento = LocalDate.of(fecha.getYear(), fecha.getMonth(), fecha.getDay());
+        LocalDate fechaNacimiento = LocalDate.of(fNacimiento.getYear(), fNacimiento.getMonth(), fNacimiento.getDay());
 
         Period periodo = Period.between(fechaNacimiento, fechaHoy);
 

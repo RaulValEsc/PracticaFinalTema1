@@ -5,11 +5,22 @@
  */
 package Vista;
 
+import Controlador.Ctrl_Registros;
+import Modelo.Registro;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author raulv
  */
 public class AnadirDialog extends javax.swing.JDialog {
+
+    Ctrl_Registros controlador = new Ctrl_Registros();
 
     /**
      * Creates new form AnadirDialog
@@ -17,6 +28,7 @@ public class AnadirDialog extends javax.swing.JDialog {
     public AnadirDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Images/agregar-usuario.png")));
     }
 
     /**
@@ -28,21 +40,183 @@ public class AnadirDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        etMatricula = new javax.swing.JTextField();
+        etNombre = new javax.swing.JTextField();
+        etFecha = new javax.swing.JFormattedTextField();
+        etNota = new javax.swing.JFormattedTextField();
+        bAnadir = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Añadir registros");
+
+        jLabel1.setText("Número de Matrícula");
+
+        jLabel2.setText("Nombre del Alumno");
+
+        jLabel3.setText("Fecha de Nacimiento");
+
+        jLabel4.setText("Nota Media");
+
+        etMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                etMatriculaKeyTyped(evt);
+            }
+        });
+
+        etNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                etNombreKeyTyped(evt);
+            }
+        });
+
+        etFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
+        etFecha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                etFechaKeyTyped(evt);
+            }
+        });
+
+        etNota.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        etNota.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                etNotaKeyTyped(evt);
+            }
+        });
+
+        bAnadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/agregar-usuario.png"))); // NOI18N
+        bAnadir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bAnadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAnadirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 414, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(etMatricula)
+                    .addComponent(etNombre)
+                    .addComponent(etFecha)
+                    .addComponent(etNota, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(180, 180, 180)
+                .addComponent(bAnadir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(180, 180, 180))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 311, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(etMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(etNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(etFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(etNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(bAnadir)
+                .addGap(34, 34, 34))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void etMatriculaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_etMatriculaKeyTyped
+        char num = evt.getKeyChar();
+        if (etMatricula.getText().length() == 9) {
+            evt.consume();
+            getToolkit().beep();
+        } else {
+            if (!Character.isDigit(num) && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE) {
+                evt.consume();
+                getToolkit().beep();
+            }
+        }
+    }//GEN-LAST:event_etMatriculaKeyTyped
+
+    private void etNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_etNombreKeyTyped
+        char letra = evt.getKeyChar();
+        if (etNombre.getText().length() == 30) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(this, "El nombre contiene un máximo de 30 letras", "Error en el tamaño", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (!Character.isAlphabetic(letra) && evt.getKeyChar() != KeyEvent.VK_SPACE && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE && evt.getKeyChar() != KeyEvent.VK_SHIFT && evt.getKeyChar() != KeyEvent.VK_COMMA && evt.getKeyChar() != KeyEvent.VK_UNDERSCORE) {
+                evt.consume();
+                getToolkit().beep();
+            }
+        }
+    }//GEN-LAST:event_etNombreKeyTyped
+
+    private void etFechaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_etFechaKeyTyped
+        char dig = evt.getKeyChar();
+        if (!Character.isDigit(dig) && evt.getKeyChar() != KeyEvent.VK_SLASH && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(this, "El formato de la fecha es: dd/MM/yyyy", "Error en el formato", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_etFechaKeyTyped
+
+    private void etNotaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_etNotaKeyTyped
+        char num = evt.getKeyChar();
+        if (!Character.isDigit(num) && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE && evt.getKeyChar() != KeyEvent.VK_COMMA) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_etNotaKeyTyped
+
+    private void bAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAnadirActionPerformed
+        if (etMatricula.getText().isEmpty() || etNombre.getText().isEmpty() || etFecha.getText().isEmpty() || etNota.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No puede haber ningún campo en blanco a la hora de añadir", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Double Nota = Double.parseDouble(etNota.getText().replace(",", "."));
+            if (Nota >= 0 && Nota <= 14) {
+                int Matricula = Integer.parseInt(etMatricula.getText());
+                String Nombre = etNombre.getText();
+                Date Fecha = null;
+                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    Fecha = formato.parse(etFecha.getText());
+                } catch (ParseException ex) {
+                    System.out.println("La fecha no ha podido ser parseada");
+                }
+                Registro r = new Registro(Matricula, Nombre, Fecha, Nota);
+                if (!controlador.anadirRegistro(r)) {
+                    getToolkit().beep();
+                    JOptionPane.showMessageDialog(this, "No se puede añadir el registro, porque la matrícula " + Matricula + " ya esta registrada.", "Error al añadir el registro " + Matricula, JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Registro añadido correctamente.", "Añadido Correctamente", JOptionPane.PLAIN_MESSAGE);
+                }
+            } else {
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this, "La nota ha de estar comprendida entre el 0 y el 14.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_bAnadirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -87,5 +261,14 @@ public class AnadirDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bAnadir;
+    private javax.swing.JFormattedTextField etFecha;
+    private javax.swing.JTextField etMatricula;
+    private javax.swing.JTextField etNombre;
+    private javax.swing.JFormattedTextField etNota;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

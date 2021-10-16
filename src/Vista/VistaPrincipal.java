@@ -9,6 +9,7 @@ import Modelo.Registro;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -53,8 +54,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         mBorrar = new javax.swing.JMenuItem();
         mEditar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        mBuscar = new javax.swing.JMenuItem();
+        mNoBuscar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Generador de Ficheros");
@@ -98,7 +99,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        bBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/elminar-usuario.png"))); // NOI18N
+        bBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/eliminar-usuario.png"))); // NOI18N
         bBorrar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,7 +169,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jSplitPane1.setTopComponent(jPanel1);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Exportar a", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 13), new java.awt.Color(204, 0, 0))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Exportar a", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 0, 0))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -181,7 +182,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
             .addGap(0, 156, Short.MAX_VALUE)
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Importar desde", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 13), new java.awt.Color(204, 0, 0))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Importar desde", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 0, 0))); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -247,21 +248,21 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Buscar");
 
-        jMenuItem4.setText("Filtrar");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        mBuscar.setText("Filtrar");
+        mBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                mBuscarActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        jMenu2.add(mBuscar);
 
-        jMenuItem5.setText("Desfiltrar");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        mNoBuscar.setText("Desfiltrar");
+        mNoBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                mNoBuscarActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem5);
+        jMenu2.add(mNoBuscar);
 
         jMenuBar1.add(jMenu2);
 
@@ -280,47 +281,53 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
         
     }//GEN-LAST:event_bBuscarActionPerformed
-
     private void bCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCrearActionPerformed
-        
+        crear();
     }//GEN-LAST:event_bCrearActionPerformed
-
     private void bBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBorrarActionPerformed
-        
+        borrar();
     }//GEN-LAST:event_bBorrarActionPerformed
-
     private void bEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEditarActionPerformed
-        
+        modificar();
     }//GEN-LAST:event_bEditarActionPerformed
-
     private void bNoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNoBuscarActionPerformed
         
     }//GEN-LAST:event_bNoBuscarActionPerformed
-
     private void mCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mCrearActionPerformed
-        
+        crear();
     }//GEN-LAST:event_mCrearActionPerformed
-
     private void mBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mBorrarActionPerformed
-        
+        borrar();
     }//GEN-LAST:event_mBorrarActionPerformed
-
     private void mEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mEditarActionPerformed
-        
+        modificar();
     }//GEN-LAST:event_mEditarActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void mBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mBuscarActionPerformed
         
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_mBuscarActionPerformed
+    private void mNoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mNoBuscarActionPerformed
         
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_mNoBuscarActionPerformed
 
+    public void crear(){
+        AnadirDialog ad = new AnadirDialog(this, true);
+        ad.setVisible(true);
+        rellenarTabla(alRegistros);
+    }
+    
+    public void borrar(){
+        BorrarDialog bd = new BorrarDialog(this, true);
+        bd.setVisible(true);
+        rellenarTabla(alRegistros);
+    }
+    
+    public void modificar(){
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -355,6 +362,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void rellenarTabla(ArrayList<Registro> lista){
+        DefaultTableModel dtm = (DefaultTableModel) tTabla.getModel();
+        dtm.setRowCount(0);
+        for(Registro r : lista){
+            dtm.addRow(new Object[]{r.getnMatricula(),r.getNombre(),r.getfNacimiento(),r.getNota(),r.getEdad()});
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bBorrar;
@@ -365,8 +380,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -374,8 +387,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JMenuItem mBorrar;
+    private javax.swing.JMenuItem mBuscar;
     private javax.swing.JMenuItem mCrear;
     private javax.swing.JMenuItem mEditar;
+    private javax.swing.JMenuItem mNoBuscar;
     private javax.swing.JTable tTabla;
     // End of variables declaration//GEN-END:variables
 }

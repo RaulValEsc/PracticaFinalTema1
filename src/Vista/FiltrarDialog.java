@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import java.awt.Toolkit;
+
 /**
  *
  * @author raulv
@@ -17,6 +19,7 @@ public class FiltrarDialog extends javax.swing.JDialog {
     public FiltrarDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Images/buscar.png")));
     }
 
     /**
@@ -29,6 +32,7 @@ public class FiltrarDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Buscar registros");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
