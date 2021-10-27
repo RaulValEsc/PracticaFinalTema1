@@ -8,6 +8,7 @@ package Vista;
 import Modelo.Registro;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author raulv
  */
 public class VistaPrincipal extends javax.swing.JFrame {
-
+    DefaultTableModel dtm;
     public static ArrayList<Registro> alRegistros = new ArrayList<>();
     
     /**
@@ -67,7 +68,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         tTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Matrícula", "Nombre Alumno", "Fecha Nacimiento", "Nota Media", "Edad"
@@ -188,7 +189,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 942, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,6 +320,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }
     
     public void borrar(){
+        dtm.getValueAt(tTabla.getSelectedRow(), 0);
         BorrarDialog bd = new BorrarDialog(this, true);
         bd.setVisible(true);
         rellenarTabla(alRegistros);
@@ -364,10 +366,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }
     
     public void rellenarTabla(ArrayList<Registro> lista){
-        DefaultTableModel dtm = (DefaultTableModel) tTabla.getModel();
+        dtm = (DefaultTableModel) tTabla.getModel();
         dtm.setRowCount(0);
         for(Registro r : lista){
-            dtm.addRow(new Object[]{r.getnMatricula(),r.getNombre(),r.getfNacimiento(),r.getNota(),r.getEdad()});
+            DateFormat formatofecha = DateFormat.getDateInstance(DateFormat.SHORT);
+            dtm.addRow(new Object[]{r.getnMatricula(),r.getNombre(),formatofecha.format(r.getfNacimiento()),r.getNota(),r.getEdad()});
         }
     }
 

@@ -7,6 +7,7 @@ package Modelo;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -37,7 +38,8 @@ public class Registro {
 
     public int getEdad() {
         LocalDate fechaHoy = LocalDate.now();
-        LocalDate fechaNacimiento = LocalDate.of(fNacimiento.getYear(), fNacimiento.getMonth(), fNacimiento.getDay());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fechaNacimiento = LocalDate.parse(fNacimiento.toString(),formatter);
 
         Period periodo = Period.between(fechaNacimiento, fechaHoy);
 

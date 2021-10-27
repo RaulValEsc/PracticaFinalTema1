@@ -13,7 +13,7 @@ import Vista.VistaPrincipal;
  * @author raulv
  */
 public class Ctrl_Registros {
-
+    
     boolean check;
 
     public Ctrl_Registros() {}
@@ -63,7 +63,7 @@ public class Ctrl_Registros {
         
     }
 
-    public boolean comprobarMatricula(int nMatricula) {
+    private boolean comprobarMatricula(int nMatricula) {
         boolean checkComprobar = true;
         for (int x = 0; x < VistaPrincipal.alRegistros.size(); x++) {
             if (VistaPrincipal.alRegistros.get(x).getnMatricula() == nMatricula) {
